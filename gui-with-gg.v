@@ -1,13 +1,17 @@
-// module additive
+// module main
 
 import os
 import gg
 import math
+import gui
+
+type GuiWindow = gui.Window
 
 @[heap]
 pub struct Window {
 pub mut:
 	ctx   &gg.Context = unsafe { 0 }
+	gui_window   &GuiWindow = unsafe { 0 }
 	image gg.Image
 }
 
@@ -103,7 +107,27 @@ pub fn (mut window Window) draw(_ voidptr) {
 		effect:   .add
 	})
 
+	// window.gui_window.update_view(main_view)
+	// window.gui_window.update_window_size()
+
 	window.ctx.end()
+}
+
+// The view generator set in update_view() is called on
+// every user event (mouse move, click, resize, etc.).
+fn main_view(window &gui.Window) gui.View {
+    return gui.text(text: 'Welcome to GUI')
+            // gui.button(
+            //     content: [gui.text(text: '${app.clicks} Clicks')]
+            //     on_click: fn (_ &gui.ButtonCfg, mut e gui.Event, mut w gui.Window) {
+            //         mut app := w.state[App]()
+            //         app.clicks += 1
+            //     }
+            // )
+}
+
+pub fn (mut window GuiWindow) modify_ui(ctx &gg.Context) {
+	window.ui = ctx
 }
 
 fn main() {
@@ -119,6 +143,21 @@ fn main() {
 		init_fn:  window.init
 		frame_fn: window.draw
 	)
+
+	window.gui_window = gui.window(
+        state: &window
+        width: window.ctx.width
+        height: window.ctx.height
+        on_init: fn (mut w gui.Window) {
+            // Call update_view() anywhere in your
+            // business logic to change views.
+            w.update_view(main_view)
+        }
+    )
+
+	// window.gui_window.modify_ui(window.ctx)
+
+	// spawn window.gui_window.run()
 
 	window.ctx.run()
 }
