@@ -22,7 +22,6 @@ fn main() {
 		create_window: true
 		window_title:  'Triangle'
 		frame_fn:      frame
-		init_fn:       init
 		user_data:     app
 	)
 	// logo_path := asset.get_path('../assets', 'logo.png')
@@ -48,11 +47,4 @@ fn (app &App) draw() {
 	sgl.v3f(-1.0, -1.0, 0.0)
 	sgl.v3f(1.0, -1.0, 0.0)
 	sgl.end()
-}
-
-fn init(mut app App) {
-	sgl_desc := sgl.Desc{
-		max_vertices: 50 * 65536
-	}
-	sgl.setup(&sgl_desc)
 }
