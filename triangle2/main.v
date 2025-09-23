@@ -36,14 +36,12 @@ fn frame(app &App) {
 }
 
 fn (app &App) draw() {
-	// Draw rectangles with gg (like rectangle.v)
 	app.gg.draw_rect_filled(10, 10, 100, 30, gg.blue)
 	app.gg.draw_rect_empty(110, 150, 80, 40, gg.black)
 
 	w := f32(win_width)
 	h := f32(win_height)
 
-	// Then add sgl triangle without ortho or matrix setup
 	sgl.begin_triangles()
 	sgl.c3f(1.0, 0.0, 0.0)  // red
 	sgl.v3f(10, 10, 0.0)  // top
