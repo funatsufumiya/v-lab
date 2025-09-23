@@ -52,6 +52,8 @@ fn (app &App) draw() {
 	w := f32(win_width)
 	h := f32(win_height)
 
+	// sgl.load_pipeline(g.pipeline.alpha)
+
 	sgl.begin_triangles()
 	sgl.c3f(1.0, 0.0, 0.0)  // red
 	sgl.v3f(10, 10, z1)  // top
