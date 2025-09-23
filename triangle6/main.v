@@ -49,9 +49,9 @@ fn (app &App) draw() {
 
 	t := f32((time.now() - app.start).milliseconds()) / 1000
 
-	z1 := math.sinf(t) * 10.0
-	z2 := math.sinf(t + 3) * 10.0
-	z3 := math.sinf(t + 6) * 10.0
+	z1 := math.sinf(t * 2) * 10.0
+	z2 := math.sinf(t * 2 + 3) * 10.0
+	z3 := math.sinf(t * 2 + 6) * 10.0
 
 	sgl.push_matrix()
 	sgl.translate(0, 0, -500);
@@ -77,7 +77,7 @@ fn (app &App) draw() {
 	sgl.pop_matrix()
 
 	sgl.push_matrix()
-	sgl.translate(0, 0, 500);
+	sgl.translate(0, 0, -1000);
 	g.draw_rect_filled(30, 30, 100, 30, gg.green)
 	sgl.pop_matrix()
 }
